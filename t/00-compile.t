@@ -2,7 +2,7 @@
 #
 # This file is part of WWW-Shorten-SCK
 #
-# This software is copyright (c) 2011 by Celogeek.
+# This software is copyright (c) 2011 by celogeek <me@celogeek.com>.
 #
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
@@ -13,9 +13,7 @@ use warnings;
 
 use Test::More;
 
-
-
-    use File::Find;
+use File::Find;
 use File::Temp qw{ tempdir };
 
 my @modules;
@@ -26,22 +24,40 @@ find(
         $found =~ s{^lib/}{};
         $found =~ s{[/\\]}{::}g;
         $found =~ s/\.pm$//;
-        # nothing to skip push @modules, $found;
+
+        # nothing to skip
+        push @modules, $found;
     },
     'lib',
 );
 
-my @scripts;
-if ( -d 'bin' ) {
+sub _find_scripts {
+    my $dir = shift @_;
+
+    my @found_scripts = ();
     find(
         sub {
             return unless -f;
             my $found = $File::Find::name;
-            # nothing to skip push @scripts, $found;
+
+            # nothing to skip
+            open my $FH, '<', $_ or do {
+                note("Unable to open $found in ( $! ), skipping");
+                return;
+            };
+            my $shebang = <$FH>;
+            return unless $shebang =~ /^#!.*?\bperl\b\s*$/;
+            push @found_scripts, $found;
         },
-        'bin',
+        $dir,
     );
+
+    return @found_scripts;
 }
+
+my @scripts;
+do { push @scripts, _find_scripts($_) if -d $_ }
+    for qw{ bin script scripts };
 
 my $plan = scalar(@modules) + scalar(@scripts);
 $plan ? ( plan tests => $plan ) : ( plan skip_all => "no tests to run" );

@@ -1,7 +1,7 @@
 #
 # This file is part of WWW-Shorten-SCK
 #
-# This software is copyright (c) 2011 by Celogeek.
+# This software is copyright (c) 2011 by celogeek <me@celogeek.com>.
 #
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
@@ -12,9 +12,8 @@ use warnings;
 # ABSTRACT: WWW::Shorten::SCK - Perl interface to sck.to
 
 package WWW::Shorten::SCK;
-
-BEGIN {
-    $WWW::Shorten::SCK::VERSION = '0.001';
+{
+    $WWW::Shorten::SCK::VERSION = '0.002';
 }
 
 use 5.006;
@@ -70,7 +69,7 @@ WWW::Shorten::SCK - WWW::Shorten::SCK - Perl interface to sck.to
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -112,11 +111,11 @@ L<WWW::Shorten>, L<perl>, L<http://sck.to/>
 
 =head1 AUTHOR
 
-Celogeek <geistteufel@yahoo.fr>
+celogeek <me@celogeek.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Celogeek.
+This software is copyright (c) 2011 by celogeek <me@celogeek.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

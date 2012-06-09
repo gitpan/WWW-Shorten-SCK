@@ -1,9 +1,8 @@
 ---
 abstract: 'WWW::Shorten::SCK - Perl interface to sck.to'
 author:
-  - 'Celogeek <geistteufel@yahoo.fr>'
+  - 'celogeek <me@celogeek.com>'
 build_requires:
-  English: 0
   File::Find: 0
   File::Temp: 0
   Module::Build: 0.3601
@@ -13,7 +12,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.3601
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.110930'
+generated_by: 'Dist::Zilla version 4.300017, CPAN::Meta::Converter version 2.120630'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -23,5 +22,10 @@ requires:
   Carp: 0
   Exporter: 0
   WWW::Shorten::generic: 0
+  base: 0
   perl: 5.008
-version: 0.001
+  strict: 0
+  warnings: 0
+resources:
+  repository: https://github.com/celogeek/WWW-Shorten-SCK.git
+version: 0.002

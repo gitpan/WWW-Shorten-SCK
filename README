@@ -1,11 +1,11 @@
 
 
 This archive contains the distribution WWW-Shorten-SCK,
-version 0.001:
+version 0.002:
 
   WWW::Shorten::SCK - Perl interface to sck.to
 
-This software is copyright (c) 2011 by Celogeek.
+This software is copyright (c) 2011 by celogeek <me@celogeek.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
