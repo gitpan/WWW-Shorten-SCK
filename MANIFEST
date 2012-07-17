@@ -1,5 +1,5 @@
 Build.PL
-CHANGES
+Changes
 LICENSE
 MANIFEST
 META.yml
@@ -7,15 +7,11 @@ README
 README.mkdn
 dist.ini
 lib/WWW/Shorten/SCK.pm
-perlcriticrc
-perltidyrc
 t/00-compile.t
 t/000-report-versions.t
 t/author-critic.t
-t/author-pod-spell.t
-t/release-consistent-version.t
-t/release-minimum-version.t
 t/release-pod-coverage.t
-t/release-pod-syntax.t
 t/release-unused-vars.t
 t/test_service.t
+xt/perlcritic.rc
+xt/perltidy.rc

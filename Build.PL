@@ -22,7 +22,7 @@ my %module_build_args = (
     "celogeek <me\@celogeek.com>"
   ],
   "dist_name" => "WWW-Shorten-SCK",
-  "dist_version" => "0.002",
+  "dist_version" => "0.1",
   "license" => "perl",
   "module_name" => "WWW::Shorten::SCK",
   "recommends" => {},
@@ -31,9 +31,10 @@ my %module_build_args = (
     "Carp" => 0,
     "Exporter" => 0,
     "WWW::Shorten::generic" => 0,
-    "base" => 0,
-    "perl" => "5.008",
+    "parent" => 0,
+    "perl" => "5.006",
     "strict" => 0,
+    "vars" => 0,
     "warnings" => 0
   },
   "script_files" => []

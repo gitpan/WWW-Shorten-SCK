@@ -6,20 +6,19 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
+package WWW::Shorten::SCK;
 use strict;
 use warnings;
+our $VERSION = '0.1';    # VERSION
 
 # ABSTRACT: WWW::Shorten::SCK - Perl interface to sck.to
 
-package WWW::Shorten::SCK;
-{
-    $WWW::Shorten::SCK::VERSION = '0.002';
-}
-
 use 5.006;
 
-use base qw( WWW::Shorten::generic Exporter );
-our @EXPORT = qw( makeashorterlink makealongerlink );
+use parent qw( WWW::Shorten::generic Exporter );
+use vars qw(@EXPORT_OK %EXPORT_TAGS);
+@EXPORT_OK = qw( makeashorterlink makealongerlink );
+%EXPORT_TAGS = ( all => [@EXPORT_OK] );
 
 use Carp;
 
@@ -35,7 +34,7 @@ sub makeashorterlink {
     );
     return unless $resp->is_success;
     my $content = $resp->content;
-    if ( $content =~ qr{\Qhttp://sck.to/\E} ) {
+    if ( $content =~ qr{\Qhttp://sck.to/\E}x ) {
         return $content;
     }
     return;
@@ -48,10 +47,10 @@ sub makealongerlink {
 
     #call api to get long url from the short
     $sck_url = "http://sck.to/$sck_url"
-        unless $sck_url =~ m!^http://!i;
+        unless $sck_url =~ m!^http://!ix;
 
     #short should contain sck.to
-    return unless $sck_url =~ qr{\Qhttp://sck.to/\E};
+    return unless $sck_url =~ qr{\Qhttp://sck.to/\E}x;
 
     my $resp = $ua->get( $sck_url . "?a=1" );
 
@@ -69,11 +68,10 @@ WWW::Shorten::SCK - WWW::Shorten::SCK - Perl interface to sck.to
 
 =head1 VERSION
 
-version 0.002
+version 0.1
 
 =head1 SYNOPSIS
 
-    use WWW::Shorten::SCK;
     use WWW::Shorten 'SCK';
 
     my $long_url = "a long url";
@@ -109,6 +107,15 @@ See the main L<WWW::Shorten> docs.
 
 L<WWW::Shorten>, L<perl>, L<http://sck.to/>
 
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website
+https://github.com/celogeek/WWW-Shorten-SCK/issues
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
 =head1 AUTHOR
 
 celogeek <me@celogeek.com>
@@ -123,3 +130,5 @@ the same terms as the Perl 5 programming language system itself.
 =cut
 
 __END__
+
+
