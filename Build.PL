@@ -17,12 +17,12 @@ my %module_build_args = (
   "configure_requires" => {
     "Module::Build" => "0.3601"
   },
-  "dist_abstract" => "WWW::Shorten::SCK - Perl interface to sck.to",
+  "dist_abstract" => "Perl interface to sck.to",
   "dist_author" => [
     "celogeek <me\@celogeek.com>"
   ],
   "dist_name" => "WWW-Shorten-SCK",
-  "dist_version" => "0.1",
+  "dist_version" => "0.2",
   "license" => "perl",
   "module_name" => "WWW::Shorten::SCK",
   "recommends" => {},

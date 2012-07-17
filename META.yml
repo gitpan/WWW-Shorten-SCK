@@ -1,5 +1,5 @@
 ---
-abstract: 'WWW::Shorten::SCK - Perl interface to sck.to'
+abstract: 'Perl interface to sck.to'
 author:
   - 'celogeek <me@celogeek.com>'
 build_requires:
@@ -31,7 +31,7 @@ resources:
   bugtracker: https://github.com/celogeek/WWW-Shorten-SCK/issues
   homepage: https://github.com/celogeek/WWW-Shorten-SCK/wiki
   repository: git://github.com/celogeek/WWW-Shorten-SCK.git
-version: 0.1
+version: 0.2
 x_Dist_Zilla:
   plugins:
     -

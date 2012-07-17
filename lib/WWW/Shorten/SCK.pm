@@ -9,9 +9,9 @@
 package WWW::Shorten::SCK;
 use strict;
 use warnings;
-our $VERSION = '0.1';    # VERSION
+our $VERSION = '0.2';    # VERSION
 
-# ABSTRACT: WWW::Shorten::SCK - Perl interface to sck.to
+# ABSTRACT: Perl interface to sck.to
 
 use 5.006;
 
@@ -64,11 +64,11 @@ sub makealongerlink {
 
 =head1 NAME
 
-WWW::Shorten::SCK - WWW::Shorten::SCK - Perl interface to sck.to
+WWW::Shorten::SCK - Perl interface to sck.to
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 SYNOPSIS
 
