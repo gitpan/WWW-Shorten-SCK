@@ -9,7 +9,7 @@
 package WWW::Shorten::SCK;
 use strict;
 use warnings;
-our $VERSION = '0.2';    # VERSION
+our $VERSION = '0.3';    # VERSION
 
 # ABSTRACT: Perl interface to sck.to
 
@@ -60,6 +60,8 @@ sub makealongerlink {
 
 1;
 
+__END__
+
 =pod
 
 =head1 NAME
@@ -68,7 +70,7 @@ WWW::Shorten::SCK - Perl interface to sck.to
 
 =head1 VERSION
 
-version 0.2
+version 0.3
 
 =head1 SYNOPSIS
 
@@ -110,7 +112,7 @@ L<WWW::Shorten>, L<perl>, L<http://sck.to/>
 =head1 BUGS
 
 Please report any bugs or feature requests on the bugtracker website
-https://github.com/celogeek/WWW-Shorten-SCK/issues
+http://tasks.celogeek.com/projects/perl-modules-www-shorten-sck
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -128,7 +130,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-__END__
-
-

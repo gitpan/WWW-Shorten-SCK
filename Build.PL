@@ -22,7 +22,7 @@ my %module_build_args = (
     "celogeek <me\@celogeek.com>"
   ],
   "dist_name" => "WWW-Shorten-SCK",
-  "dist_version" => "0.2",
+  "dist_version" => "0.3",
   "license" => "perl",
   "module_name" => "WWW::Shorten::SCK",
   "recommends" => {},
