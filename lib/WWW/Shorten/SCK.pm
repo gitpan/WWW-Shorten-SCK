@@ -1,7 +1,7 @@
 #
 # This file is part of WWW-Shorten-SCK
 #
-# This software is copyright (c) 2011 by celogeek <me@celogeek.com>.
+# This software is copyright (c) 2013 by celogeek <me@celogeek.com>.
 #
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
@@ -9,7 +9,8 @@
 package WWW::Shorten::SCK;
 use strict;
 use warnings;
-our $VERSION = '0.3';    # VERSION
+use URI::Escape qw/uri_escape_utf8/;
+our $VERSION = '0.4';    # VERSION
 
 # ABSTRACT: Perl interface to sck.to
 
@@ -26,12 +27,7 @@ sub makeashorterlink {
     my $url     = shift or croak 'No URL passed to makeashorterlink';
     my $ua      = __PACKAGE__->ua();
     my $sck_url = 'http://sck.to';
-    my $resp    = $ua->post(
-        $sck_url,
-        [   a   => 1,
-            url => $url,
-        ]
-    );
+    my $resp    = $ua->get( $sck_url . '?a=1&url=' . uri_escape_utf8($url), );
     return unless $resp->is_success;
     my $content = $resp->content;
     if ( $content =~ qr{\Qhttp://sck.to/\E}x ) {
@@ -54,8 +50,7 @@ sub makealongerlink {
 
     my $resp = $ua->get( $sck_url . "?a=1" );
 
-    return unless $resp->is_success;
-    return $resp->content;
+    return $resp->header('location');
 }
 
 1;
@@ -70,7 +65,7 @@ WWW::Shorten::SCK - Perl interface to sck.to
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 SYNOPSIS
 
@@ -112,7 +107,7 @@ L<WWW::Shorten>, L<perl>, L<http://sck.to/>
 =head1 BUGS
 
 Please report any bugs or feature requests on the bugtracker website
-http://tasks.celogeek.com/projects/perl-modules-www-shorten-sck
+https://tasks.celogeek.com/projects/perl-modules-www-shorten-sck
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -124,7 +119,7 @@ celogeek <me@celogeek.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by celogeek <me@celogeek.com>.
+This software is copyright (c) 2013 by celogeek <me@celogeek.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
