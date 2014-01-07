@@ -10,9 +10,10 @@ package WWW::Shorten::SCK;
 use strict;
 use warnings;
 use URI::Escape qw/uri_escape_utf8/;
-our $VERSION = '0.4';    # VERSION
+use JSON;
+our $VERSION = '0.5';    # VERSION
 
-# ABSTRACT: Perl interface to sck.to
+# ABSTRACT: Perl interface to sck.pm
 
 use 5.006;
 
@@ -26,12 +27,12 @@ use Carp;
 sub makeashorterlink {
     my $url     = shift or croak 'No URL passed to makeashorterlink';
     my $ua      = __PACKAGE__->ua();
-    my $sck_url = 'http://sck.to';
-    my $resp    = $ua->get( $sck_url . '?a=1&url=' . uri_escape_utf8($url), );
+    my $sck_url = 'http://api.sck.pm';
+    my $resp    = $ua->get( $sck_url . '?url=' . uri_escape_utf8($url), );
     return unless $resp->is_success;
-    my $content = $resp->content;
-    if ( $content =~ qr{\Qhttp://sck.to/\E}x ) {
-        return $content;
+    my $content = decode_json( $resp->content );
+    if ( ref $content && $content->{status} eq 'OK' ) {
+        return 'http://sck.pm/' . $content->{short};
     }
     return;
 }
@@ -42,15 +43,17 @@ sub makealongerlink {
     my $ua = __PACKAGE__->ua();
 
     #call api to get long url from the short
-    $sck_url = "http://sck.to/$sck_url"
-        unless $sck_url =~ m!^http://!ix;
+    $sck_url = substr( $sck_url, 14 )
+        if substr( $sck_url, 0, 14 ) eq 'http://sck.pm/';
 
-    #short should contain sck.to
-    return unless $sck_url =~ qr{\Qhttp://sck.to/\E}x;
+    my $resp = $ua->get("http://api.sck.pm?surl=$sck_url");
+    return unless $resp->is_success;
+    my $content = decode_json( $resp->content );
+    if ( ref $content && $content->{status} eq 'OK' ) {
+        return $content->{url};
+    }
+    return;
 
-    my $resp = $ua->get( $sck_url . "?a=1" );
-
-    return $resp->header('location');
 }
 
 1;
@@ -61,11 +64,16 @@ __END__
 
 =head1 NAME
 
-WWW::Shorten::SCK - Perl interface to sck.to
+WWW::Shorten::SCK - Perl interface to sck.pm
 
 =head1 VERSION
 
-version 0.4
+version 0.5
+
+=head1 DESCRIPTION
+
+A Perl interface to the web sck.pm. SCK keep a database of long URLs,
+and give you a tiny one.
 
 =head1 SYNOPSIS
 
@@ -75,11 +83,6 @@ version 0.4
     my $short_url = "";
     $short_url = makeashorterlink($long_url);
     $long_url = makealongerlink($short_url);
-
-=head1 DESCRIPTION
-
-A Perl interface to the web sck.to. SCK keep a database of long URLs,
-and give you a tiny one.
 
 =head1 METHODS
 
@@ -102,12 +105,12 @@ See the main L<WWW::Shorten> docs.
 
 =head1 SEE ALSO
 
-L<WWW::Shorten>, L<perl>, L<http://sck.to/>
+L<WWW::Shorten>, L<perl>, L<http://sck.pm/>
 
 =head1 BUGS
 
 Please report any bugs or feature requests on the bugtracker website
-https://tasks.celogeek.com/projects/perl-modules-www-shorten-sck
+https://github.com/celogeek/WWW-Shorten-SCK/issues
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
